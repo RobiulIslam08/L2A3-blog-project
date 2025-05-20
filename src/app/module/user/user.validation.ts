@@ -1,7 +1,8 @@
 import { z } from "zod";
 
 const userValidationSchema = z.object({
-  name: z
+ body:z.object({
+   name: z
     .string({ required_error: "Name is required" })
     .min(3, { message: "Name must be at least 3 characters" })
     .max(50, { message: "Name must be less than 50 characters" }),
@@ -22,6 +23,7 @@ const userValidationSchema = z.object({
   isBlocked: z
     .boolean()
     .optional(), // optional because default is false
+ })
 });
 
 export const userValidation = {
