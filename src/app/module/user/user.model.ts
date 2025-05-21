@@ -1,7 +1,8 @@
 import { model, Schema } from "mongoose";
 import { IUser } from "./user.interface";
 
-
+import bcrypt from "bcryptjs";
+import config from "../../config";
 const userSchema = new Schema<IUser>({
   name:{
 	type:String,
@@ -43,4 +44,32 @@ const userSchema = new Schema<IUser>({
 {
 	timestamps:true
 })
+
+// userSchema.pre('save', async function (next) {
+//   // eslint-disable-next-line @typescript-eslint/no-this-alias
+//   const user = this; // doc
+//   // hashing password and save into DB
+
+//   user.password = await bcrypt.hash(
+//     user.password,
+//     Number(config.bcrypt_solt_rounds),
+//   );
+
+//   next();
+// });
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next(); // 👈 prevent re-hashing
+  this.password = await bcrypt.hash(
+    this.password,
+    Number(config.bcrypt_solt_rounds),
+  );
+  next();
+});
+
+// set '' after saving password
+userSchema.post('save', function (doc, next) {
+  doc.password = '';
+  next();
+});
+
 export const User = model<IUser>('User',userSchema)
