@@ -7,7 +7,7 @@ const app: Application = express();
 
 //parser
 app.use(express.json());
-app.use('/api/v1',router)
+app.use('/api',router)
 app.use(cors());
 app.get('/', (req: Request, res: Response) => {
   const a = 1;
