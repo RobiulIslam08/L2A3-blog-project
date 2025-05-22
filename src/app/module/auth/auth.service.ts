@@ -1,3 +1,4 @@
+import config from '../../config';
 import { IUser } from '../user/user.interface';
 import { User } from '../user/user.model';
 import bcrypt from "bcryptjs";
@@ -24,7 +25,7 @@ const login = async (payload: { email: string; password: string }) => {
     payload?.password,
     user?.password,
   );
-  console.log(isPasswordMatched)
+  
 
   if (!isPasswordMatched) {
     throw new Error('Wrong Password!!! Tell me who are you? 😈');
@@ -35,7 +36,8 @@ const login = async (payload: { email: string; password: string }) => {
     role: user?.role,
   };
 
-  const token = jwt.sign(jwtPayload, 'secret', { expiresIn: '1d' });
+  const token = jwt.sign(jwtPayload,  config.jwt_access_secret as string, { expiresIn: '1d' });
+  
 
   return { token, user };
 

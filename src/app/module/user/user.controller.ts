@@ -9,6 +9,7 @@ const createUser = catchAsync(async(req, res) => {
 	const result = await userService.createUser(payload)
 	
 	  sendResponse(res, {
+		success: true, 
     statusCode: status.OK,
 
     message: 'User is created succesfully',

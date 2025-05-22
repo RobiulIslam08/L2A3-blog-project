@@ -16,6 +16,7 @@ const register = catchAsync(async (req, res) => {
       _id: result?._id,
       name: result?.name,
       email: result?.email,
+  
     },
   });
 });

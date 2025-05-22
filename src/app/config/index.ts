@@ -13,4 +13,5 @@ export default {
    bcrypt_solt_rounds: process.env.BCYPT_SALT_ROUNDS,
  NODE_ENV: process.env.NODE_ENV, 
   database_url: process.env.DATABASE_URL,
+   jwt_access_secret:process.env.JWT_ACCESS_SECRET,
 };

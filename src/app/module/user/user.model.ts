@@ -1,5 +1,5 @@
 import { model, Schema } from "mongoose";
-import { IUser } from "./user.interface";
+import { IUser, UserModel } from "./user.interface";
 
 import bcrypt from "bcryptjs";
 import config from "../../config";
@@ -71,5 +71,9 @@ userSchema.post('save', function (doc, next) {
   doc.password = '';
   next();
 });
+userSchema.statics.isUserExitsByCustomId = async function (id) {
+  return await User.findOne({ id }).select('+password');
+};
 
-export const User = model<IUser>('User',userSchema)
+
+export const User = model<IUser, UserModel>('User',userSchema)
