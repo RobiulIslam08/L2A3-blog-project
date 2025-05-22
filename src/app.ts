@@ -18,6 +18,6 @@ app.get('/', (req: Request, res: Response) => {
 });
 //global error handaling === aita sobsomoy niche rakha uchit. tanahole error catch korte parbe nah
 app.use(globalErrorHandler)
-app.use(notFound)
+// app.use(notFound)
 
 export default app;
