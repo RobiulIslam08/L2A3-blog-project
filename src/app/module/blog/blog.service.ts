@@ -10,10 +10,16 @@ const createBlog = async (payload: IBlog) => {
 };
 const updateBlog = async (id: string, payload: Partial<IBlog>) => {
     const result = Blog.findByIdAndUpdate(id, payload,{ new: true })
+
+  return result
+}
+const deleteBlog = async (id: string) => {
+    const result = Blog.findByIdAndDelete(id)
     console.log(result)
   return result
 }
 export const blogService = {
+  createBlog,
  updateBlog,
-  createBlog
+  deleteBlog
 };
