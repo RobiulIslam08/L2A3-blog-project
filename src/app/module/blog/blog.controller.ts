@@ -61,8 +61,30 @@ const deleteBlog = catchAsync(async(req,res) => {
 
     
 })
+const getBlog = catchAsync(async (req, res) => {
+
+  const result = await blogService.getBlog();
+
+  if (!result) {
+    sendResponse(res, {
+      success: false,
+      message: 'Blog not found',
+      statusCode: status.NOT_FOUND,
+      data: null,
+    });
+    return;
+  }
+
+  sendResponse(res, {
+    success: true,
+    message: 'Blog retrieved successfully',
+    statusCode: status.OK,
+    data: result
+  });
+});
 export const blogController = {
   createBlog,
   updateBlog,
-  deleteBlog
+  deleteBlog,
+  getBlog
 }

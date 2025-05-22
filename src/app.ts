@@ -4,6 +4,7 @@ import cors from 'cors';
 import express from 'express';
 import router from './app/routes';
 import globalErrorHandler from './app/middlewares/globalErrorHandler';
+import notFound from './app/middlewares/notFound';
 const app: Application = express();
 
 //parser
@@ -17,5 +18,6 @@ app.get('/', (req: Request, res: Response) => {
 });
 //global error handaling === aita sobsomoy niche rakha uchit. tanahole error catch korte parbe nah
 app.use(globalErrorHandler)
+app.use(notFound)
 
 export default app;

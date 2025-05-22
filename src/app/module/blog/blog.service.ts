@@ -18,8 +18,13 @@ const deleteBlog = async (id: string) => {
     console.log(result)
   return result
 }
+const getBlog = async() => {
+  const result = await Blog.find();
+  return result;
+}
 export const blogService = {
   createBlog,
  updateBlog,
-  deleteBlog
+  deleteBlog,
+  getBlog
 };
