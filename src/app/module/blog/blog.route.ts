@@ -11,5 +11,6 @@ import { USER_ROLE } from '../user/user.constant';
 const router = express.Router()
 
 router.post('/', auth(USER_ROLE.user), validateRequest(blogValidation.createBlogSchema),  blogController.createBlog)
+router.patch('/:id', auth(USER_ROLE.user), validateRequest(blogValidation.updateBlogSchema),  blogController.updateBlog)
 
 export const blogRouter = router

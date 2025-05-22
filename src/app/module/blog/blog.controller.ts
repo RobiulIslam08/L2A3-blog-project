@@ -21,7 +21,34 @@ const createBlog = catchAsync(async (req, res) => {
     },
   });
 });
+const updateBlog = catchAsync(async (req, res) => {
+  const id = req.params.id;
+  const body = req.body;
+  const result = await blogService.updateBlog(id, body);
+  if (!result) {
+    sendResponse(res, {
+      success: false,
+      message: 'Blog not found',
+      statusCode: status.NOT_FOUND,
+      data: null,
+    });
+    return;
+  }
 
+  sendResponse(res, {
+    success: true,
+    message: 'Blog updated successfully',
+    statusCode: status.OK,
+
+    data: {
+      _id: result._id,
+      title: result.title,
+      content: result.content,
+      author: result.author,
+    },
+  });
+});
 export const blogController = {
   createBlog,
+  updateBlog,
 };
