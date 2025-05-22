@@ -63,7 +63,7 @@ const deleteBlog = catchAsync(async(req,res) => {
 })
 const getBlog = catchAsync(async (req, res) => {
 
-  const result = await blogService.getBlog();
+  const result = await blogService.getBlog(req.query);
 
   if (!result) {
     sendResponse(res, {
